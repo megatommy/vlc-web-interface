@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#2b3e50" />
+        <title>Server - Radiostations</title>
+
+        <!-- CSS -->
+        <link href="/stylesheets/bootstrap.superhero.min.css" rel="stylesheet">
+        <link href="/stylesheets/style.css" rel="stylesheet">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <span class="track-name"></span>
+
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" id="get_ip">Get IP</a></li>
+                            <li><a href="/">Favorites</a></li>
+                            <li><a href="/channels">Channels</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="btn-group" id="start_stop">
+                    <button class="btn btn-default volume-button" id="backward" type="button"><span class="glyphicon glyphicon-backward"></span></button>
+                    <button class="btn btn-default volume-button" id="forward" type="button"><span class="glyphicon glyphicon-forward"></span></button>
+                    <button class="btn btn-default" type="button" id="start" data-pls=""><span class="glyphicon glyphicon-play"></span></button>
+                    <!-- <button class="btn btn-default" type="button"  id="stop"><span class="glyphicon glyphicon-stop"></span></button> -->
+                    <!-- <button class="btn btn-default volume-button" id="voldown" type="button" ><span class="glyphicon glyphicon-minus"></span></button> -->
+                    <!-- <button class="btn btn-default volume-button" id="volup" type="button" ><span class="glyphicon glyphicon-plus"></span></button> -->
+                </div>
+            </div>
+            
+        </div>
+        </nav>
+
+
+        <div class="container">
+            <div id="radio-channels">
+            <div class="row row-search border-bottom">
+                <div class="col-xs-12">
+                    <div class="input-group search-div padding-top-bottom">
+                        <span class="input-group-addon glyphicon glyphicon-search" style="top: 0; background-color: #1F2C38;"></span>
+                        <form id="searchform" onsubmit="javascript:return false;"><input autocomplete="off" type="text" id="search" class="form-control" placeholder="Search"></form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dummytrack" class="row border-bottom radio-channel" style="display:none;">
+                <div class="col-xs-12 padding-top-bottom channel-link" data-trackid="">
+                    <button class="btn btn-link {{btn_type}} pull-right" type="button">
+                        <span class="glyphicon glyphicon-{{icon_type}}"></span>
+                    </button>
+                    <h3 class="channel-name"></h3>
+                    <h5 class="channel-station"></h5>
+                </div>
+            </div>
+
+            </div>
+        </div>
+                <!-- JavaScript -->
+        <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/javascripts/main.js"></script>
+    </body>
+</html>

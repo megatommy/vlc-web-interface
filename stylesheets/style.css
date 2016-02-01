@@ -1,0 +1,47 @@
+body {
+    padding-top: 40px;
+}
+#search {
+    background-color: #1F2C38;
+    font-size: 1.5em;
+    color: #ebebeb;
+    padding-left: 0;
+    padding-right: 0;
+}
+.border-bottom {
+    border-bottom: 1px solid #eee;
+
+}
+.padding-top-bottom {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+#radio-channels {
+    overflow: hidden;
+}
+@media(max-width: 768px){
+    #radio-channels{
+        overflow: visible;
+    }
+}
+.radio-channel {
+    cursor: pointer;
+}
+.radio-channel .btn {
+    margin: 0.5em 0;
+}
+.channel-name {
+    margin-top: 0;
+}
+.channel-station {
+    margin-bottom: 0;
+}
+.no-fav {
+    color: #222;
+}
+.remove-fav {
+    color: #D9534F;
+}
+.fav {
+    color: #F0AD4E;
+}
