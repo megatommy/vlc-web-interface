@@ -18,6 +18,7 @@ body {
 }
 #radio-channels {
     overflow: hidden;
+    margin-bottom: 50px;
 }
 @media(max-width: 768px){
     #radio-channels{
@@ -31,17 +32,18 @@ body {
     margin: 0.5em 0;
 }
 .channel-name {
+    font-size: 1.3em;
     margin-top: 0;
+    margin-bottom: 0;
 }
 .channel-station {
     margin-bottom: 0;
 }
-.no-fav {
-    color: #222;
+
+.inactive {
+    color: #999;
 }
-.remove-fav {
-    color: #D9534F;
-}
-.fav {
-    color: #F0AD4E;
+
+.track-name {
+    padding-left: 0;
 }

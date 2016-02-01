@@ -1,12 +1,37 @@
-//start btn
+StartHere();
+
+
 $('#start').click(function(){
     sendCommand({'command':'pl_pause'});
+    $(this).blur();
+});
+
+
+$('#backward').click(function(){
+    sendCommand({'command':'pl_previous'});
+    $(this).blur();
+});
+
+
+$('#forward').click(function(){
+    sendCommand({'command':'pl_next'});
+    $(this).blur();
+});
+
+$('#repeat').click(function(){
+    sendCommand({'command':'pl_loop'});
+    $(this).blur();
+});
+
+
+$('#random').click(function(){
+    sendCommand({'command':'pl_random'});
+    $(this).blur();
 });
 
 $('#radio-channels').on('click', function (e) {
     var target = $(e.target),
         trackid = target.closest('.channel-link').data('trackid');
-    console.log(e.target);
     sendCommand('command=pl_play&id=' + trackid);
 
 });
@@ -33,25 +58,28 @@ $('#searchform').submit(function(e){
     return false;
 });
 
-$.getJSON('requests/playlist.json', function(data){
-    var vlc_playlist = data.children[0].children;
+function StartHere(){
+    $.getJSON('/requests/playlist.json', function(data){
+        var vlc_playlist = data.children[0].children;
 
-    vlc_playlist.forEach(function(el, i){
+        vlc_playlist.forEach(function(el, i){
 
-        var clone = $('#dummytrack').clone();
+            var clone = $('#dummytrack').clone();
 
-        clone.find('.channel-link').attr('data-trackid', el.id);
+            clone.find('.channel-link').attr('data-trackid', el.id);
 
-        clone.find('.channel-name').text(el.name);
+            clone.find('.channel-name').text(el.name);
 
-        clone.find('.channel-station').text(format_time(el.duration));
+            clone.find('.channel-station').text(format_time(el.duration));
 
-        clone.css('display', 'block');
+            clone.css('display', 'block');
 
-        clone.appendTo('#radio-channels');
+            clone.appendTo('#radio-channels');
 
+        });
     });
-});
+    setInterval(update_status, 950);
+}
 
 
 
@@ -67,5 +95,32 @@ function format_time(time){
 }
 
 function sendCommand(params){
-    $.get('requests/status.xml',params);
+    $.get('/requests/status.xml',params);
+}
+
+function update_status(){
+    $.get('/requests/status.xml',function(data){
+        var status = {
+            random: JSON.parse($('random', data).text()),
+            repeat: JSON.parse($('loop', data).text()),
+            state: $('state', data).text(),
+
+            time: $('time', data).text(),
+            length: $('length', data).text(),
+            title: $('[name="title"]', data).text(),
+            artist: $('[name="artist"]', data).text(),
+        };
+
+        if(status.state == 'playing'){
+            $('#start span').removeClass('glyphicon-play').addClass('glyphicon-pause');
+        } else {
+            $('#start span').removeClass('glyphicon-pause').addClass('glyphicon-play');
+        }
+
+        $('#repeat').toggleClass('inactive', !status.repeat);
+        $('#random').toggleClass('inactive', !status.random);
+
+        $('.track-name').html('<b>'+ status.title +'</b> by '+ status.artist);
+        console.log(status);
+    });
 }
